@@ -24,8 +24,14 @@
         <div class="col-6">
             <label for="category_id">Category</label>
             <select name="category_id" id="category_id" class="form-control">
+                <option value="">No category</option>
                 @foreach ($categories as $category)
-                    <option value="{{ old('category_id', $category->id) }}">{{ $category->name }}</option>
+                    <option value="{{ old('category_id', $category->id) }}"
+                        @isset($post->category)
+                            {{ $category->id === $post->category->id ? 'selected' : '' }}
+                        @endisset
+                        >
+                        {{ $category->name }}</option>
                 @endforeach
             </select>
         </div>

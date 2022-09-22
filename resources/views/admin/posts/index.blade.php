@@ -30,9 +30,11 @@
                         {{ $post->title }}
                     </td>
                     <td>
-                        <div class="badge badge-pill p-1 w-100" style="background-color: {{ $post->category->color }}">
-                            {{ $post->category->name }}
-                        </div>
+                        @if (isset($post->category))
+                            <div class="badge badge-pill p-1 w-100" style="background-color: {{ $post->category->color }}">
+                                {{ $post->category->name }}
+                            </div>     
+                        @endif
                     </td>
                     <td>
                         {{ $post->post_date }}
