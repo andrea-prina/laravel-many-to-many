@@ -17,6 +17,13 @@
                     </div>     
                 </li>
             @endif
+            <li class="list-group-item">
+                @forelse ($post->tags as $tag)
+                    {{"#" . $tag->name }} 
+                @empty
+                    No tags
+                @endforelse
+            </li>
             <li class="list-group-item">{{ $post->user->name }}</li>
             <li class="list-group-item">{{ $post->post_date }}</li>
         </ul>
