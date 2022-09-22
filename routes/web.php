@@ -30,4 +30,5 @@ Route::middleware('auth')
     ->group(function() {
         Route::get('/', 'HomeController@index')->name('home'); // --> the Route '/admin' with name 'admin.home'
         Route::resource('/posts', 'PostController');
+        Route::resource('/categories', 'CategoryController');
     });
