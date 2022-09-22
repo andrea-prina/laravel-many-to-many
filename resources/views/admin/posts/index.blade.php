@@ -12,8 +12,7 @@
                 <th scope="col">Category</th>
                 <th scope="col">Date</th>
                 <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col" colspan="2"><a href="{{ route('admin.posts.create') }}" class="btn btn-light border border-primary p-0 px-1">Create Post</a></th>
             </tr>
         </thead>
         <tbody>
