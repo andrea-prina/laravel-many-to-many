@@ -10,11 +10,13 @@
             <p class="card-text">{{ $post->post_content }}</p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <div class="badge badge-pill p-1 w-25" style="background-color: {{ $post->category->color }}">
-                    {{ $post->category->name }}
-                </div>
-            </li>
+            @if (isset($post->category))
+                <li class="list-group-item">
+                    <div class="badge badge-pill p-1 w-100" style="background-color: {{ $post->category->color }}">
+                        {{ $post->category->name }}
+                    </div>     
+                </li>
+            @endif
             <li class="list-group-item">{{ $post->user->name }}</li>
             <li class="list-group-item">{{ $post->post_date }}</li>
         </ul>
