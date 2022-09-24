@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\models\Category;
 use App\models\Post;
+use App\models\Tag;
 use DateTime;
 use Illuminate\Cache\RedisTaggedCache;
 use Illuminate\Http\Request;
@@ -40,8 +41,9 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.create', compact('post', 'categories'));
+        return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -63,8 +65,9 @@ class PostController extends Controller
         $newPost->post_content = $data['post_content'];
         $newPost->post_image = $data['post_image'];
         $newPost->post_date = new DateTime();
-
+        
         $newPost->save();
+        $newPost->tags()->sync($data['tags']);
 
         return redirect()->route('admin.posts.index');
     }
@@ -91,7 +94,8 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -109,6 +113,8 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $post->update($sentData);
+        $post->tags()->sync($sentData['tags']);
+
 
         return redirect()->route('admin.posts.index');
     }

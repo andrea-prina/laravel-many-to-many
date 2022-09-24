@@ -21,6 +21,23 @@
         </div>
     </div>
     <div class="row my-3">
+        @foreach ($tags as $tag)
+            @if ($errors->any())
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" name="tags[]" class="form-check-input" id="input-tags" value="{{ $tag->id }}"
+                    {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                    <label for="input-tags" class="m-0">{{ $tag->name }}</label>
+                </div>
+            @else
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" name="tags[]" class="form-check-input" id="input-tags" value="{{ $tag->id }}"
+                    {{ $post->tags->contains($tag) ? 'checked' : '' }}>
+                    <label for="input-tags" class="m-0">{{ $tag->name }}</label>
+                </div>
+            @endif
+        @endforeach
+    </div>
+    <div class="row my-3">
         <div class="col-6">
             <label for="category_id">Category</label>
             <select name="category_id" id="category_id" class="form-control">
