@@ -6,7 +6,7 @@
         @csrf
         @method('POST')
 
-        @include('includes.posts_form')
+        @include('admin.posts.includes.form')
         
     </form>
 
