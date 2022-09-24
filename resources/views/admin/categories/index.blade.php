@@ -24,13 +24,18 @@
                             <div class="badge badge-pill text-light" style="background-color: {{ $category->color }}">{{ $category->color }}</div>
                         </td>
                         <td>
-                            VIEW
+                            <a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-success">VIEW</a>
                         </td>
                         <td>
-                            EDIT
+                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-primary">EDIT</a>
                         </td>
                         <td>
-                            DELETE
+                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                            
+                                <input type="submit" value="DELETE" class="btn btn-danger">
+                            </form>
                         </td>
                     </tr>
                 @empty

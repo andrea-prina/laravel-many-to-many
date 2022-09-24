@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\models\Category;
+use App\models\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -49,7 +50,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $posts = Post::where('category_id', $id)->get();
+        return view('admin.categories.show', ['category'=> $category, 'posts'=>$posts]);
     }
 
     /**
