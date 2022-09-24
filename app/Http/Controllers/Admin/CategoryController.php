@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\models\Category;
 use App\models\Post;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,7 +13,7 @@ class CategoryController extends Controller
 {
 
     protected $validationRules = [
-        'name' => 'required|min:2',
+        'name' => 'required|min:2|unique:categories,name',
         'color' => 'required',
     ];
 
@@ -93,7 +94,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        // $validatedData = $request->validate(
+        //     ['name' => ['required', 'min:2', 'unique:categories,name',
+        //     Rule::unique('categories')->ignore($category->name, 'name')
+        //     ],
+        //     'color' => ['required']]);
     }
 
     /**
