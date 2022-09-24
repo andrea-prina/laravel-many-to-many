@@ -6,9 +6,16 @@ use App\Http\Controllers\Controller;
 use App\models\Category;
 use App\models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+
+    protected $validationRules = [
+        'name' => 'required|min:2',
+        'color' => 'required',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +35,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $category = new Category();
+        return view('admin.categories.create', compact('category'));
     }
 
     /**
@@ -39,7 +47,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $validatedData = $request->validate($this->validationRules);
+
+        $newCategory = new Category();
+        $newCategory->name = $data['name'];
+        $newCategory->color = $data['color'];
+        $newCategory->slug = Str::slug($data['name'], '-');
+
+        $newCategory->save();
+
+        return redirect()->route('admin.categories.index');
     }
 
     /**
