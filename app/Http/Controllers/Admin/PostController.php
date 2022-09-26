@@ -115,6 +115,9 @@ class PostController extends Controller
 
         $post = Post::findOrFail($id);
 
+        $imgPath = Storage::put('uploads/posts', $sentData['post_image']);
+        $sentData['post_image'] = $imgPath;
+
         $post->update($sentData);
         $post->tags()->sync($sentData['tags']);
 
