@@ -10,6 +10,7 @@ use DateTime;
 use Illuminate\Cache\RedisTaggedCache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -17,7 +18,7 @@ class PostController extends Controller
     protected $validationRules = [
         'title' => 'required|min:5|max:255',
         'post_content' => 'required|min:5',
-        'post_image' => 'required|active_url',
+        'post_image' => 'required|max:512',
     ];
 
     /**
@@ -63,9 +64,11 @@ class PostController extends Controller
         $newPost->user_id = Auth::user()->id;
         $newPost->category_id = $data['category_id'];
         $newPost->post_content = $data['post_content'];
-        $newPost->post_image = $data['post_image'];
         $newPost->post_date = new DateTime();
         
+        $imgPath = Storage::put('uploads/posts', $data['post_image']);
+
+        $newPost->post_image = $imgPath;
         $newPost->save();
         $newPost->tags()->sync($data['tags']);
 

@@ -1,6 +1,6 @@
 <div class="container text-center d-flex justify-content-center">
     <div class="card" style="width: 30rem;">
-        <img src="{{ $post->post_image }}" class="card-img-top p-3" alt="image of post: {{ $post->title}}">
+        <img src="{{ asset('/storage' . '/' . $post->post_image) }}" class="card-img-top p-3" alt="image of post: {{ $post->title}}">
         <div class="card-body">
             <h5 class="card-title">{{ $post->title}}</h5>
             <p class="card-text">{{ $post->post_content }}</p>

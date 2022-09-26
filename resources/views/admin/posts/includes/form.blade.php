@@ -16,7 +16,7 @@
     <div class="row my-3">
         <div class="col-12">
             <label for="post_image">Post image url</label>
-            <input type="text" id="post_image" class="form-control @error('post_image') mb-1 border-danger @enderror" name="post_image" value="{{ old('post_image', $post->post_image) }}">
+            <input type="file" id="post_image" class="form-control @error('post_image') mb-1 border-danger @enderror" name="post_image" value="{{ old('post_image', $post->post_image) }}">
             @include('includes.validation_error', ['input' => 'post_image'])
         </div>
     </div>
